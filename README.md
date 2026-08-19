@@ -80,10 +80,31 @@ cp .env.example .env
 
 ## Usage
 
-Commands match the argparse flags in the scripts.
+Run in this order. `trading_env.py` is imported by train, validate, and deploy; it is not a CLI. `test_imports.py` is an optional smoke test.
+
+```mermaid
+flowchart TD
+    env["Copy .env.example to .env"] --> collect["1. python scripts/data_collection.py"]
+    collect --> processed["Writes processed_data/processed_data.csv"]
+    processed --> archiver["2. python scripts/data_processor.py"]
+    archiver --> training["Writes processed_data/training_data.csv"]
+    training --> tune{"Tune hyperparameters?"}
+    tune -->|Optional| optuna["python scripts/hyperparameter_tuning.py"]
+    tune -->|Skip or after Optuna| train["3. python scripts/train_model.py"]
+    optuna --> train
+    train --> model["Writes models/ including training_metadata.json"]
+    model --> validate["4. python scripts/validate_model.py"]
+    model --> viz["Optional: python scripts/visualization.py"]
+    model --> deploy["5. python scripts/deploy_model.py"]
+    deploy --> trades["Writes logs/paper_trades.csv"]
+    trades --> analyze["6. python scripts/analyze_trades.py"]
+```
+
+Cron: `run_script.sh` only runs `data_collection.py` during market hours. Set `PROJECT_ROOT` if the project is not at `$HOME/ai_trading_bot`. Holiday dates in that script are for 2025.
 
 ```bash
 python scripts/data_collection.py
+python scripts/data_processor.py
 
 python scripts/hyperparameter_tuning.py --trials 5 --jobs 1
 python scripts/hyperparameter_tuning.py --timeout 14400 --jobs 4 --train
@@ -93,10 +114,8 @@ python scripts/train_model.py --optimize
 python scripts/train_model.py --retrain
 
 python scripts/validate_model.py
+python scripts/visualization.py
 python scripts/deploy_model.py
 python scripts/analyze_trades.py
-python scripts/visualization.py
 python test_imports.py
 ```
-
-`run_script.sh` is a cron wrapper for market hours. Set `PROJECT_ROOT` if the project is not at `$HOME/ai_trading_bot`. Holiday dates in that script are for 2025.
