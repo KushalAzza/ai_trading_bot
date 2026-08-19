@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# Environment
+.env
+.env.*
+!.env.example
+environment.yml
+
+# Dependencies
+dependencies/miniconda3/
+ta-lib/
+
+# Data directories
+models/*.pkl
+models/*.h5
+models/*.joblib
+
+# Logs
+logs/eval/*
+logs/train/*
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary and cache files
+*.tmp
+*.temp
+.cache/
+.pytest_cache/
+
+# Data files
+*.csv
+*.json
+option_chain_response.json
+
+# Keep specific files that should be tracked
+!requirements.txt
+!setup.py
+!README.md
+!LICENSE
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb

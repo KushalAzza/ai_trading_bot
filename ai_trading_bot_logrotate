@@ -1,0 +1,10 @@
+# Adjust this path to your install.
+/opt/ai_trading_bot/logs/cron.log {
+    daily
+    rotate 7
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 644 root root
+}
