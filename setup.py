@@ -16,6 +16,7 @@ setup(
         "tqdm",
     ],
     author="KushalAzza",
+    license="MIT",
     description="Reinforcement learning-based options trading system for algorithmic trading on Indian markets",
     python_requires=">=3.8",
 ) 

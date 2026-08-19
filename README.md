@@ -10,6 +10,7 @@ Generated data, models, and logs are not in git. A fresh clone has scripts and c
 ai_trading_bot/
 ├── .env.example              # Copy to .env; never commit .env
 ├── .gitignore
+├── LICENSE
 ├── README.md
 ├── requirements.txt
 ├── setup.py
@@ -119,3 +120,7 @@ python scripts/deploy_model.py
 python scripts/analyze_trades.py
 python test_imports.py
 ```
+
+## License
+
+MIT. See [LICENSE](LICENSE).
